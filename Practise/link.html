@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>link</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        html {
+  height: 100%;
+}
+body {
+  display: flex;
+  height: 100%;
+  background-color: #333;
+}
+.word {
+    position:relative;
+    left:540px;
+  color: white;
+  font: 700 normal 2.5em 'tahoma';
+  text-shadow: 5px 2px #222324, 2px 4px #222324, 3px 5px #222324;
+}
+
+#para{
+    position:absolute;
+    margin: auto;
+  color: white;
+  font: 700 normal 2.5em 'tahoma';
+}
+    </style>
+
+<script>
+        var words = ['Glow', 'Beauty'],
+    part,
+    i = 0,
+    offset = 0,
+    len = words.length,
+    forwards = true,
+    skip_count = 0,
+    skip_delay = 15,
+    speed = 70;
+var wordflick = function () {
+  setInterval(function () {
+    if (forwards) {
+      if (offset >= words[i].length) {
+        ++skip_count;
+        if (skip_count == skip_delay) {
+          forwards = false;
+          skip_count = 0;
+        }
+      }
+    }
+    else {
+      if (offset == 0) {
+        forwards = true;
+        i++;
+        offset = 0;
+        if (i >= len) {
+          i = 0;
+        }
+      }
+    }
+    part = words[i].substr(0, offset);
+    if (skip_count == 0) {
+      if (forwards) {
+        offset++;
+      }
+      else {
+        offset--;
+      }
+    }
+    $('.word').text(part);
+  },speed);
+};
+
+$(document).ready(function () {
+  wordflick();
+});
+
+    </script>
+</head>
+<body>
+    <!-- mailto: is used to open the user's email program  -->
+    <!-- <a href="mailto:aaryankgarg@gmail.com">Email</a> -->
+
+    <!-- use button as link  -->
+    <!-- <button onclick="document.location='https://youtube.com'"></button> -->
+
+    <!-- <a href="https://youtube.com"></a> -->
+    <div id="para">This is just an experiment</div>
+    <div class="word"></div>
+</body>
+</html>
